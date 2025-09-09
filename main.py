@@ -5,7 +5,7 @@ from stl import mesh
 from PyQt5 import QtWidgets, QtGui, QtCore
 from functions import *
 
-# Koyu → Açık karakterler
+# Bold-Light Characters
 ASCII_CHARS = "@%#*+=-:. "
 
 class AsciiViewer(QtWidgets.QMainWindow):
@@ -18,7 +18,7 @@ class AsciiViewer(QtWidgets.QMainWindow):
         self.setCentralWidget(central)
         layout = QtWidgets.QVBoxLayout(central)
 
-        # Kontroller
+        # Controls
         controls = QtWidgets.QHBoxLayout()
         load_btn = QtWidgets.QPushButton("Load STL")
         load_btn.clicked.connect(self.load_stl)
@@ -32,7 +32,7 @@ class AsciiViewer(QtWidgets.QMainWindow):
         controls.addStretch()
         layout.addLayout(controls)
 
-        # ASCII alanı
+        # ASCII Area
         self.ascii_area = QtWidgets.QPlainTextEdit()
         self.ascii_area.setReadOnly(True)
         font = QtGui.QFontDatabase.systemFont(QtGui.QFontDatabase.FixedFont)
@@ -44,14 +44,14 @@ class AsciiViewer(QtWidgets.QMainWindow):
         self.status = QtWidgets.QLabel("STL not loaded.")
         layout.addWidget(self.status)
 
-        # Veriler
+        # Datas
         self.points = None
         self.brightness = None
 
         for s in (self.rx_slider, self.ry_slider, self.rz_slider, self.zoom_slider):
             s.valueChanged.connect(self.update_render)
 
-        # Menü
+        # Menu
         file_menu = self.menuBar().addMenu("&File")
         open_action = QtWidgets.QAction("Open...", self)
         open_action.triggered.connect(self.load_stl)
@@ -121,4 +121,5 @@ def main():
     sys.exit(app.exec_())
 
 if __name__ == "__main__":
+
     main()
