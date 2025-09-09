@@ -17,7 +17,7 @@ def mesh_to_shaded_points(m, light_dir=np.array([1,1,1])):
     """Calculate from mesh organized by vertices and parts """
     light_dir = light_dir / np.linalg.norm(light_dir)
     verts = m.vectors.reshape(-1, 3)
-    norms = np.repeat(m.normals, 3, axis=0)  # her vertex için normal
+    norms = np.repeat(m.normals, 3, axis=0)  # normal for every vertex
     brightness = np.dot(norms, light_dir)
     brightness = np.clip(brightness, 0, 1)
     return verts, brightness
@@ -46,7 +46,7 @@ def points_to_ascii_shaded(points_proj, brightness, cols=120, rows=60, chars=ASC
 
     for xg, yg, b in zip(ix, iy, brightness):
         prev = grid_bright[yg, xg]
-        if np.isnan(prev) or b > prev:   # daha parlak olanı al
+        if np.isnan(prev) or b > prev:   # use brighter one
             grid_bright[yg, xg] = b
 
     out_lines = []
@@ -59,4 +59,5 @@ def points_to_ascii_shaded(points_proj, brightness, cols=120, rows=60, chars=ASC
                 idx = int(grid_bright[r, c] * (len(chars)-1))
                 line_chars.append(chars[idx])
         out_lines.append("".join(line_chars))
+
     return "\n".join(out_lines)
