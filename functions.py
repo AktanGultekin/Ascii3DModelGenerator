@@ -46,7 +46,7 @@ def points_to_ascii_shaded(points_proj, brightness, cols=120, rows=60, chars=ASC
 
     for xg, yg, b in zip(ix, iy, brightness):
         prev = grid_bright[yg, xg]
-        if np.isnan(prev) or b > prev:   # use brighter one
+        if np.isnan(prev) or b > prev:   # used brighter one
             grid_bright[yg, xg] = b
 
     out_lines = []
@@ -61,3 +61,4 @@ def points_to_ascii_shaded(points_proj, brightness, cols=120, rows=60, chars=ASC
         out_lines.append("".join(line_chars))
 
     return "\n".join(out_lines)
+
